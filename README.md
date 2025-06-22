@@ -6,16 +6,16 @@ Este projeto é uma API Node.js que processa uma lista de filmes, identifica os 
 
 - **Node.js**
 - **Express**
-- **SQLite3** (banco em memória)
-- **csv-parser** (leitura do CSV)
-- **Jest** e **Supertest** (testes)
+- **SQLite3** 
+- **csv-parser** 
+- **Jest** e **Supertest** 
 
 ## Instalação
 
 1. **Clone o repositório:**
    ```bash
    git clone https://github.com/warsiege00/outsera.teste.backend
-   cd backend
+   cd outsera.teste.backend
    ```
 
 2. **Instale as dependências:**
