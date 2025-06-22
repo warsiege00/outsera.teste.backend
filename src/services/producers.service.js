@@ -1,5 +1,5 @@
 const splitProducers = require('../utils/splitProducers');
-const db = new require('../db')
+const db = require('../db')
 const moviesService = require('./movies.service');
   
 function createProducerIntervalsTable() {

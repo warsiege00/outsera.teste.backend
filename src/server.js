@@ -26,14 +26,15 @@ app.get('/producers/awards/intervals', async (req, res) => {
   }
 });
 
-app.get('/debug/:table', async (req, res) => {
-  try {
-    const rows = await debugService.getTable(req.params.table);
-    res.json(rows);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});
+//Apenas para teste
+// app.get('/debug/:table', async (req, res) => {
+//   try {
+//     const rows = await debugService.getTable(req.params.table);
+//     res.json(rows);
+//   } catch (err) {
+//     res.status(500).json({ error: err.message });
+//   }
+// });
 
 async function startServer() {
   try {
@@ -46,12 +47,17 @@ async function startServer() {
     await movieService.insertMoviesFromCSV();
     await producersService.processAndInsertProducerIntervals();
     
-    app.listen(PORT, () => {
+    return app.listen(PORT, () => {
       console.log('API disponível em http://localhost:' + PORT);
     });
   } catch (err) {
     console.error('[ERRO] Erro ao iniciar o servidor:', err);
+    process.exit(1);
   }
 }
 
-startServer();
+if (require.main === module) {
+  startServer();
+}
+
+module.exports = { app, startServer };

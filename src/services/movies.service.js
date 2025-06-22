@@ -1,6 +1,6 @@
 const fs = require('fs');
 const csv = require('csv-parser');
-const db = new require('../db')
+const db = require('../db')
 
 function createMoviesTable() {
   return new Promise((resolve, reject) => {
