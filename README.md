@@ -2,13 +2,31 @@
 
 Este projeto é uma API Node.js que processa uma lista de filmes, identifica os produtores com múltiplas vitórias e calcula os intervalos entre suas premiações.
 
-## Tecnologias Utilizadas
+##Tecnologias
 
 - **Node.js**
 - **Express**
 - **SQLite3** 
 - **csv-parser** 
 - **Jest** e **Supertest** 
+
+## Arquitetura
+
+O projeto segue uma arquitetura em camadas:
+
+```
+src/
+├── config/           # Configurações (banco de dados, etc.)
+├── controllers/      # Controladores HTTP
+├── middleware/       # Middlewares (tratamento de erros, etc.)
+├── models/          # Modelos
+├── repositories/    # Camada de acesso a dados
+├── routes/          # Definição de rotas
+├── services/        # Lógica de negócio
+├── utils/           # Utilitários
+├── app.js           # Configuração da aplicação Express
+└── server.js        # Ponto de entrada do servidor
+```
 
 ## Instalação
 
@@ -60,32 +78,37 @@ Retorna os produtores com o menor e maior intervalo entre vitórias.
   ]
 }
 ```
-## Estrutura do Projeto
-
-```
-src/
-  services/
-    movies.service.js         # Lógica de filmes e leitura do CSV
-    producers.service.js      # Lógica de produtores e intervalos
-    debug.service.js          # Utilitário para debug de tabelas
-  utils/
-    splitproducers.js         # Função utilitária para separar produtores
-  db.js                       # Instância do banco SQLite
-  server.js                   # Inicialização do servidor e rotas principais
-movielist.csv                 # Base de dados de filmes (CSV)
-```
-
-## Fluxo de Processamento
-
-1. **Criação das tabelas** no banco em memória.
-2. **Leitura do CSV** e inserção dos filmes.
-3. **Processamento dos produtores vencedores** e cálculo dos intervalos.
-4. **Disponibilização dos dados** via endpoints REST.
 
 ## Testes
-
-Para rodar os testes :
 
 ```bash
 npm test
 ```
+
+### Tabela: movies
+- `id`: Chave primária
+- `year`: Ano do filme
+- `title`: Título do filme
+- `studios`: Estúdios
+- `producers`: Produtores (separados por vírgula ou "and")
+- `winner`: Indica se o filme venceu ("yes" ou "no")
+
+### Tabela: producer_intervals
+- `producer`: Nome do produtor
+- `interval`: Intervalo em anos entre prêmios
+- `previousWin`: Ano da vitória anterior
+- `followingWin`: Ano da vitória seguinte
+
+## Funcionalidades
+
+1. **Carregamento de Dados**: Lê automaticamente o arquivo CSV `movielist.csv`
+2. **Processamento de Produtores**: Separa produtores múltiplos (ex: "Joel Silver, Matthew Vaughn")
+3. **Cálculo de Intervalos**: Calcula intervalos entre prêmios consecutivos
+4. **API REST**: Fornece endpoint para consultar intervalos mínimo e máximo
+
+
+
+Back - Itens observados:
+Ao iniciar os testes ou a aplicação, falha com o seguinte erro: Cannot find module '../utils/splitProducers' from 'src/services/producers.service.js'
+O arquivo carregado ao iniciar a aplicação e o teste deve ser o original fornecido.
+Não há uma separação clara de camadas no projeto, existe lógica de negócio no server.js e código comentado espalhado.

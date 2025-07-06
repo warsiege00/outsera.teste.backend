@@ -35,10 +35,10 @@ describe('GET /producers/awards/intervals', () => {
     expect(minProducer.followingWin).toBe(1991);
 
     const maxProducer = response.body.max[0];
-    expect(maxProducer.producer).toBe('Bo Derek');
-    expect(maxProducer.interval).toBe(26);
-    expect(maxProducer.previousWin).toBe(1990);
-    expect(maxProducer.followingWin).toBe(2016);
+    expect(maxProducer.producer).toBe('Matthew Vaughn');
+    expect(maxProducer.interval).toBe(13);
+    expect(maxProducer.previousWin).toBe(2002);
+    expect(maxProducer.followingWin).toBe(2015);
   });
 
   it('deve retornar múltiplos produtores se eles compartilharem o mesmo intervalo mínimo', async () => {
