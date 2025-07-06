@@ -10,6 +10,14 @@ Este projeto é uma API Node.js que processa uma lista de filmes, identifica os 
 - **csv-parser** 
 - **Jest** e **Supertest** 
 
+## Funcionalidades
+
+1. **Carregamento de Dados**: Lê automaticamente o arquivo CSV `movielist.csv`
+2. **Processamento de Produtores**: Separa produtores múltiplos (ex: "Joel Silver, Matthew Vaughn")
+3. **Cálculo de Intervalos**: Calcula intervalos entre prêmios consecutivos
+4. **API REST**: Fornece endpoint para consultar intervalos mínimo e máximo
+
+
 ## Arquitetura
 
 O projeto segue uma arquitetura em camadas:
@@ -85,30 +93,4 @@ Retorna os produtores com o menor e maior intervalo entre vitórias.
 npm test
 ```
 
-### Tabela: movies
-- `id`: Chave primária
-- `year`: Ano do filme
-- `title`: Título do filme
-- `studios`: Estúdios
-- `producers`: Produtores (separados por vírgula ou "and")
-- `winner`: Indica se o filme venceu ("yes" ou "no")
 
-### Tabela: producer_intervals
-- `producer`: Nome do produtor
-- `interval`: Intervalo em anos entre prêmios
-- `previousWin`: Ano da vitória anterior
-- `followingWin`: Ano da vitória seguinte
-
-## Funcionalidades
-
-1. **Carregamento de Dados**: Lê automaticamente o arquivo CSV `movielist.csv`
-2. **Processamento de Produtores**: Separa produtores múltiplos (ex: "Joel Silver, Matthew Vaughn")
-3. **Cálculo de Intervalos**: Calcula intervalos entre prêmios consecutivos
-4. **API REST**: Fornece endpoint para consultar intervalos mínimo e máximo
-
-
-
-Back - Itens observados:
-Ao iniciar os testes ou a aplicação, falha com o seguinte erro: Cannot find module '../utils/splitProducers' from 'src/services/producers.service.js'
-O arquivo carregado ao iniciar a aplicação e o teste deve ser o original fornecido.
-Não há uma separação clara de camadas no projeto, existe lógica de negócio no server.js e código comentado espalhado.

@@ -12,12 +12,10 @@ async function startServer() {
     await MovieService.initializeDatabase();
     await ProducerService.initializeDatabase();
 
-    // Carregar dados do CSV
     console.log('Carregando filmes do CSV...');
     const moviesCount = await MovieService.loadMoviesFromCSV();
     console.log(`${moviesCount} filmes carregados`);
 
-    // Processar intervalos de produtores
     console.log('Processando intervalos de produtores...');
     const intervalsCount = await ProducerService.processAndSaveProducerIntervals();
     console.log(`${intervalsCount} intervalos processados`);
